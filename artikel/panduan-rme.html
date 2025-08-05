@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Lengkap Rekam Medis Elektronik (RME) - SobatRM</title>
+    <meta name="description" content="Panduan lengkap RME untuk mahasiswa dan tenaga kesehatan Indonesia. Implementasi, keuntungan, dan tantangan RME di era digital.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2E8B57, #20B2AA);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Article Styles */
+        .article-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, #2E8B57, #20B2AA);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="medical" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1000" height="1000" fill="url(%23medical)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .breadcrumb {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .article-meta {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .article-content {
+            padding: 3rem 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .lead {
+            font-size: 1.3rem;
+            color: #2E8B57;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.1), rgba(32, 178, 170, 0.1));
+            border-left: 4px solid #2E8B57;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .article-content h2 {
+            color: #2E8B57;
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #20B2AA;
+            position: relative;
+        }
+        
+        .article-content h3 {
+            color: #20B2AA;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.1), rgba(32, 178, 170, 0.1));
+            padding: 2rem;
+            border-left: 5px solid #2E8B57;
+            border-radius: 0 15px 15px 0;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .highlight-box::before {
+            content: "💡";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #2E8B57;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .pros, .cons {
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .pros {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), rgba(46, 139, 87, 0.1));
+            border-left: 5px solid #228B22;
+        }
+        
+        .cons {
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 165, 0, 0.1));
+            border-left: 5px solid #FF8C00;
+        }
+        
+        .pros h4, .cons h4 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .pros h4 {
+            color: #228B22;
+        }
+        
+        .cons h4 {
+            color: #FF8C00;
+        }
+        
+        .steps-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .steps-container h3 {
+            text-align: center;
+            color: #2E8B57;
+            margin-bottom: 2rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #2E8B57, #20B2AA);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #20B2AA;
+        }
+        
+        .tip-card h4 {
+            color: #2E8B57;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #2E8B57, #20B2AA);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            border-radius: 15px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn:hover {
+            background: white;
+            color: #2E8B57;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .article-footer {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-top: 3px solid #e9ecef;
+        }
+        
+        .tags {
+            margin-bottom: 2rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            margin: 0.25rem;
+            font-size: 0.9rem;
+        }
+        
+        .share-buttons {
+            text-align: center;
+        }
+        
+        .share-buttons a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #2E8B57;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .share-buttons a:hover {
+            background: #20B2AA;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-header {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">🏥 SobatRM</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="#artikel">Artikel</a></li>
+                        <li><a href="#tentang">Tentang</a></li>
+                        <li><a href="#kontak">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <article class="article-container">
+            <header class="article-header">
+                <div class="breadcrumb">📂 Panduan • 🏠 <a href="index.html" style="color: white;">Beranda</a></div>
+                <h1 class="article-title">Panduan Lengkap Rekam Medis Elektronik (RME)</h1>
+                <div class="article-meta">
+                    📅 5 Agustus 2025 • ⏱️ 8 menit baca • 👤 Tim SobatRM
+                </div>
+            </header>
+
+            <div class="article-content">
+                <p class="lead">
+                    🚀 RME jadi tren masa depan kesehatan Indonesia! Di era digital ini, transformasi dari rekam medis manual ke elektronik bukan lagi pilihan, tapi keharusan. Yuk pahami implementasi, keuntungan, dan tantangan penerapan RME yang lagi hot banget dibahas di dunia kesehatan!
+                </p>
+
+                <h2>🤔 Apa Sih RME Itu?</h2>
+                <p>
+                    Rekam Medis Elektronik (Electronic Medical Records/EMR) adalah sistem digital yang menyimpan informasi kesehatan pasien secara elektronik. Bayangkan semua catatan medis pasien yang biasanya berserakan dalam berbagai kertas, sekarang tersimpan rapi dalam satu sistem komputer yang terintegrasi.
+                </p>
+
+                <div class="highlight-box">
+                    <strong>Fun Fact:</strong> Menurut Kemenkes, target implementasi RME di semua fasilitas kesehatan Indonesia adalah 2030. Wow, ambitious banget kan? Tapi ini penting untuk meningkatkan kualitas layanan kesehatan kita.
+                </div>
+
+                <h2>✅ Keuntungan vs Tantangan RME</h2>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Keuntungan RME</h4>
+                        <ul>
+                            <li><strong>Efisiensi Waktu:</strong> Akses data pasien dalam hitungan detik</li>
+                            <li><strong>Akurasi Data:</strong> Mengurangi error tulisan tangan dokter</li>
+                            <li><strong>Integrasi Sistem:</strong> Terintegrasi dengan BPJS dan SATUSEHAT</li>
+                            <li><strong>Hemat Ruang:</strong> Bye-bye tumpukan berkas!</li>
+                            <li><strong>Backup Otomatis:</strong> Data aman dari kehilangan</li>
+                            <li><strong>Analytics:</strong> Laporan dan statistik real-time</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Tantangan RME</h4>
+                        <ul>
+                            <li><strong>Investasi Awal:</strong> Biaya implementasi yang lumayan</li>
+                            <li><strong>Training Staff:</strong> Perlu pelatihan intensif</li>
+                            <li><strong>Ketergantungan Teknologi:</strong> Kalau server down, ribet!</li>
+                            <li><strong>Keamanan Data:</strong> Harus extra hati-hati soal privacy</li>
+                            <li><strong>Standardisasi:</strong> Belum semua rumah sakit pakai sistem yang sama</li>
+                            <li><strong>Internet Dependency:</strong> Butuh koneksi internet stabil</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>🛠️ Implementasi RME: Step by Step</h2>
+                <div class="steps-container">
+                    <h3>Langkah-langkah Implementasi RME</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Assessment & Planning</strong><br>
+                            Evaluasi kebutuhan rumah sakit, budget, dan kesiapan SDM. Buat roadmap implementasi yang realistis dan terukur.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>Vendor Selection</strong><br>
+                            Pilih vendor RME yang tepercaya dan sesuai kebutuhan. Pastikan ada support teknis yang baik dan training yang memadai.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Infrastructure Setup</strong><br>
+                            Persiapan hardware, network, dan backup system. Jangan lupa security measures yang kuat!
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <strong>Staff Training</strong><br>
+                            Training intensif untuk semua user mulai dari dokter, perawat, sampai admin. Change management is key!
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div>
+                            <strong>Pilot Testing</strong><br>
+                            Uji coba di unit tertentu dulu sebelum full implementation. Fix bugs dan improve workflow.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div>
+                            <strong>Go Live & Monitoring</strong><br>
+                            Launch system secara bertahap dan monitor performa. Siap-siap support intensif di minggu pertama!
+                        </div>
+                    </div>
+                </div>
+
+                <h2>💡 Tips Sukses Implementasi RME</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>🎯 Leadership Buy-in</h4>
+                        <p>Pastikan management fully support. Tanpa dukungan pimpinan, implementasi RME bisa gagal total.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>👥 User Involvement</h4>
+                        <p>Libatkan end user (dokter, perawat) dari awal perencanaan. Mereka yang akan pakai daily!</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📚 Continuous Training</h4>
+                        <p>Training bukan one-time event. Perlu refresher training dan update skill secara berkala.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🔒 Data Security</h4>
+                        <p>Invest in robust security measures. Data pasien itu sacred, jangan sampai bocor!</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📊 Performance Metrics</h4>
+                        <p>Set KPI yang jelas dan monitor progress regularly. Track ROI dari investasi RME.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🤝 Vendor Partnership</h4>
+                        <p>Pilih vendor yang mau jadi partner jangka panjang, bukan cuma jualan sistem doang.</p>
+                    </div>
+                </div>
+
+                <h2>🇮🇩 RME dan Regulasi Indonesia</h2>
+                <p>
+                    Di Indonesia, implementasi RME didukung oleh berbagai regulasi:
+                </p>
+                <ul>
+                    <li><strong>Permenkes No. 24 Tahun 2022</strong> tentang Rekam Medis</li>
+                    <li><strong>PP No. 71 Tahun 2019</strong> tentang Penyelenggaraan Sistem dan Transaksi Elektronik</li>
+                    <li><strong>Permenkes No. 82 Tahun 2013</strong> tentang Sistem Informasi Manajemen Rumah Sakit</li>
+                    <li><strong>Roadmap SATUSEHAT</strong> untuk interoperabilitas data kesehatan</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>Update Terbaru:</strong> Platform SATUSEHAT dari Kemenkes sedang digenjot untuk jadi backbone ekosistem kesehatan digital Indonesia. Semua fasilitas kesehatan ditargetkan terintegrasi dengan SATUSEHAT untuk memudahkan pertukaran data pasien.
+                </div>
+
+                <h2>🎯 Kesimpulan</h2>
+                <p>
+                    RME memang challenging untuk diimplementasikan, tapi benefit jangka panjangnya luar biasa. Kunci suksesnya ada di perencanaan yang matang, dukungan leadership, dan training yang komprehensif. 
+                </p>
+                <p>
+                    Untuk sobat-sobat yang kerja di RS atau klinik, mulai prepare diri dari sekarang. Skill digital literacy dan pemahaman tentang RME bakal jadi basic requirement di masa depan.
+                </p>
+
+                <div class="cta-section">
+                    <h3>🚀 Siap Jadi Expert RME?</h3>
+                    <p>Pelajari lebih dalam tentang rekam medis elektronik dan persiapkan diri untuk masa depan kesehatan digital!</p>
+                    <div class="cta-buttons">
+                        <a href="index.html" class="btn">🏠 Kembali ke Beranda</a>
+                        <a href="#" class="btn">📚 Artikel Lainnya</a>
+                        <a href="#" class="btn">💬 Diskusi di Forum</a>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="article-footer">
+                <div class="tags">
+                    <strong>🏷️ Tags:</strong>
+                    <span class="tag">rekam-medis-elektronik</span>
+                    <span class="tag">rme</span>
+                    <span class="tag">digitalisasi-kesehatan</span>
+                    <span class="tag">satusehat</span>
+                    <span class="tag">implementasi-teknologi</span>
+                </div>
+                
+                <div class="share-buttons">
+                    <h4>📤 Bagikan Artikel:</h4>
+                    <a href="#" onclick="shareToWhatsApp()">📱 WhatsApp</a>
+                    <a href="#" onclick="shareToTwitter()">🐦 Twitter</a>
+                    <a href="#" onclick="shareToLinkedIn()">💼 LinkedIn</a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SobatRM. Dibuat dengan ❤️ untuk komunitas rekam medis Indonesia.</p>
+        </div>
+    </footer>
+
+    <script>
+        function shareToWhatsApp() {
+            const title = document.title;
+            const url = window.location.href;
+            window.open(`https://wa.me/?text=${encodeURIComponent(title + ' - ' + url)}`, '_blank');
+        }
+        
+        function shareToTwitter() {
+            const title = document.title;
+            const url = window.location.href;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        function shareToLinkedIn() {
+            const url = window.location.href;
+            window.open(`https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
