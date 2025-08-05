@@ -1,0 +1,273 @@
+# Sistem Template Artikel SobatRM
+
+## 📝 Template Artikel Baru
+
+### File: `artikel/template-artikel.html`
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[JUDUL ARTIKEL] - SobatRM</title>
+    <meta name="description" content="[DESKRIPSI SINGKAT]">
+    <link rel="icon" href="../favicon.ico">
+    <style>
+        /* Import CSS dari homepage */
+        @import url('../style.css');
+        
+        /* Specific artikel styling */
+        .article-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            color: #2E8B57;
+            margin-bottom: 1rem;
+        }
+        
+        .article-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .article-content h2 {
+            color: #2E8B57;
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .article-content h3 {
+            color: #20B2AA;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.1), rgba(32, 178, 170, 0.1));
+            padding: 1.5rem;
+            border-left: 4px solid #2E8B57;
+            border-radius: 0 10px 10px 0;
+            margin: 2rem 0;
+        }
+        
+        .tips-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tips-box h4 {
+            color: #20B2AA;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header sama seperti homepage -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">🏥 SobatRM</a>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">Beranda</a></li>
+                        <li><a href="../artikel.html">Artikel</a></li>
+                        <li><a href="../tentang.html">Tentang</a></li>
+                        <li><a href="../kontak.html">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <article class="article-container">
+                <header class="article-header">
+                    <span class="article-category">📂 [KATEGORI]</span>
+                    <h1 class="article-title">[JUDUL ARTIKEL]</h1>
+                    <div class="article-meta">
+                        📅 [TANGGAL] • ⏱️ [ESTIMASI BACA] menit • 👤 Tim SobatRM
+                    </div>
+                </header>
+
+                <div class="article-content">
+                    <p class="lead">[PARAGRAF PEMBUKA YANG MENARIK]</p>
+
+                    <h2>🎯 Poin Utama</h2>
+                    <p>[KONTEN UTAMA ARTIKEL]</p>
+
+                    <div class="highlight-box">
+                        <strong>💡 Tahukah kamu?</strong><br>
+                        [FAKTA MENARIK ATAU STATISTIK]
+                    </div>
+
+                    <h2>📋 Langkah-langkah</h2>
+                    <ol>
+                        <li>[LANGKAH 1]</li>
+                        <li>[LANGKAH 2]</li>
+                        <li>[LANGKAH 3]</li>
+                    </ol>
+
+                    <div class="tips-box">
+                        <h4>🚀 Tips Pro:</h4>
+                        <ul>
+                            <li>[TIP 1]</li>
+                            <li>[TIP 2]</li>
+                            <li>[TIP 3]</li>
+                        </ul>
+                    </div>
+
+                    <h2>🎯 Kesimpulan</h2>
+                    <p>[KESIMPULAN DAN CALL TO ACTION]</p>
+                </div>
+
+                <footer class="article-footer">
+                    <div class="tags">
+                        <strong>🏷️ Tags:</strong>
+                        <span class="tag">[tag1]</span>
+                        <span class="tag">[tag2]</span>
+                        <span class="tag">[tag3]</span>
+                    </div>
+                    
+                    <div class="share-buttons">
+                        <h4>📤 Bagikan Artikel:</h4>
+                        <a href="#" onclick="shareToWhatsApp()">📱 WhatsApp</a>
+                        <a href="#" onclick="shareToTwitter()">🐦 Twitter</a>
+                        <a href="#" onclick="shareToLinkedIn()">💼 LinkedIn</a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer sama seperti homepage -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 SobatRM. Dibuat dengan ❤️ untuk komunitas rekam medis Indonesia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function shareToWhatsApp() {
+            const title = document.title;
+            const url = window.location.href;
+            window.open(`https://wa.me/?text=${encodeURIComponent(title + ' - ' + url)}`, '_blank');
+        }
+        
+        function shareToTwitter() {
+            const title = document.title;
+            const url = window.location.href;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        function shareToLinkedIn() {
+            const url = window.location.href;
+            window.open(`https://linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
+```
+
+## 📊 Quick Article Generator
+
+### Buat file: `create-article.md`
+
+```markdown
+# TEMPLATE QUICK ARTIKEL
+
+## Langkah Cepat Buat Artikel Baru:
+
+1. **Copy template-artikel.html**
+2. **Rename** ke: `artikel/judul-artikel.html`
+3. **Replace placeholder:**
+   - [JUDUL ARTIKEL] → Judul asli
+   - [KATEGORI] → Panduan/Tips/Regulasi
+   - [TANGGAL] → Tanggal publish
+   - [ESTIMASI BACA] → 3-8 menit
+   - [KONTEN] → Isi artikel Anda
+
+4. **Update homepage** - tambah artikel ke grid
+5. **Commit & push** ke GitHub
+
+## 🕐 Time Estimation:
+- **Setup template**: 5 menit
+- **Tulis artikel**: 30-60 menit  
+- **Review & publish**: 10 menit
+- **Total**: ~1 jam per artikel
+
+## 📈 Growth Path:
+
+### Bulan 1-3: HTML Statis
+- Focus content creation
+- 10-20 artikel berkualitas
+- Build audience
+
+### Bulan 4-6: Optimize & Automate  
+- GitHub Actions untuk auto-deploy
+- Template yang lebih advanced
+- Social media integration
+
+### Bulan 7-12: Migrate to JAMstack
+- Jekyll/Hugo dengan CMS
+- Multi-author support
+- Advanced analytics
+
+### Year 2+: Full Platform
+- Custom CMS atau WordPress
+- Membership system
+- Course/premium content
+```
+
+## 🔄 Auto-Update System (Advanced)
+
+### File: `.github/workflows/auto-update.yml`
+
+```yaml
+name: Auto Update Homepage
+on:
+  push:
+    paths:
+      - 'artikel/*.html'
+
+jobs:
+  update-homepage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update article list
+        run: |
+          # Script to auto-update homepage dengan artikel terbaru
+          python scripts/update-homepage.py
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto-update homepage with new articles" || exit 0
+          git push
+```
